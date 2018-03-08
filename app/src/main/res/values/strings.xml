@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">News Feed</string>
+    <string name="internet_connection_err">No internet connection.</string>
+    <string name="stories_err">No stories were found.</string>
 </resources>

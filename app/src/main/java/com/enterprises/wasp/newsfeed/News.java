@@ -1,19 +1,20 @@
 package com.enterprises.wasp.newsfeed;
 
-import java.util.Date;
-
 public class News {
 
     private String privateSectionName;
 
     private String privateWebTitle;
 
-    private Date privateWebPublicationDate;
+    private String privateWebPublicationDate;
 
-    public News(String sectionName, String webTitle, Date webPublicationDate) {
+    private String privateUrl;
+
+    public News(String sectionName, String webTitle, String webPublicationDate, String url) {
         privateSectionName = sectionName;
         privateWebTitle = webTitle;
         privateWebPublicationDate = webPublicationDate;
+        privateUrl = url;
     }
 
     public String getPrivateSectionName() {
@@ -24,8 +25,12 @@ public class News {
         return privateWebTitle;
     }
 
-    public Date getPrivateWebPublicationDate() {
+    public String getPrivateWebPublicationDate() {
         return privateWebPublicationDate;
+    }
+
+    public String getPrivateUrl() {
+        return privateUrl;
     }
 }
 
