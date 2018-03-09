@@ -108,19 +108,21 @@ public final class QueryUtils {
         List<News> news = new ArrayList<>();
 
         try {
-            JSONObject baseJsonResponse = new JSONObject(newsJSON);
-            JSONArray newsArray = baseJsonResponse.getJSONArray("response");
+            JSONObject baseJson = new JSONObject(newsJSON);
+            JSONArray newsArray = baseJson.getJSONObject("response").getJSONArray("results");
 
             for (int i = 0; i < newsArray.length(); i++) {
-                JSONObject currentStory = newsArray.getJSONObject(i);
-                JSONObject results = currentStory.getJSONObject("results");
+                JSONObject temp = newsArray.getJSONObject(i);
+                String sectionName = temp.getString("sectionName");
+                String webTitle = temp.getString("webTitle");
+                String date = temp.getString("webPublicationDate");
+                String webUrl = temp.getString("webUrl");
 
-                String title = results.getString("webTitle");
-                String section = results.getString("sectionName");
-                String date = results.getString("webPublicationDate");
-                String url = results.getString("webUrl");
+                String replaceT = date.replace("T", " ");
+                String removeY = replaceT.replace("Z", "");
+                date = removeY;
 
-                News news1 = new News(title, section, date, url);
+                News news1 = new News(sectionName, webTitle, date, webUrl);
                 news.add(news1);
             }
         } catch (JSONException e) {

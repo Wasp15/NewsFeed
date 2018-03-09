@@ -37,7 +37,7 @@ public class NewsAdapter extends ArrayAdapter<News> {
         String date = currentStory.getPrivateWebPublicationDate();
         dateView.setText(date);
 
-        return convertView;
+        return listItemView;
     }
 }
 
