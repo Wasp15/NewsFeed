@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<News>> {
 
     public static final String GUARDIAN_URL =
-            "https://content.guardianapis.com/search?q=games&page-size=50&api-key=b0958911-b1a1-42d3-bb91-62aa34a31843";
+            "https://content.guardianapis.com/search?q=games&page-size=50&api-key=b0958911-b1a1-42d3-bb91-62aa34a31843=";
     private static final int NEWS_LOADER_ID = 1;
     private ProgressBar progressBar;
     private TextView emptyView;
