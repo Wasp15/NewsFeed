@@ -21,6 +21,10 @@ import java.util.List;
 public final class QueryUtils {
 
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
+    private static final String SECTION_NAME = "sectionName";
+    private static final String WEB_TITLE = "webTitle";
+    private static final String WEB_DATE = "webPublicationDate";
+    private static final String WEB_URL = "webUrl";
 
     private QueryUtils() {
     }
@@ -67,7 +71,7 @@ public final class QueryUtils {
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
-            if (urlConnection.getResponseCode() == 200) {
+            if (urlConnection.getResponseCode() == urlConnection.HTTP_OK) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
             } else {
@@ -113,10 +117,10 @@ public final class QueryUtils {
 
             for (int i = 0; i < newsArray.length(); i++) {
                 JSONObject temp = newsArray.getJSONObject(i);
-                String sectionName = temp.getString("sectionName");
-                String webTitle = temp.getString("webTitle");
-                String date = temp.getString("webPublicationDate");
-                String webUrl = temp.getString("webUrl");
+                String sectionName = temp.getString(SECTION_NAME);
+                String webTitle = temp.getString(WEB_TITLE);
+                String date = temp.getString(WEB_DATE);
+                String webUrl = temp.getString(WEB_URL);
 
                 String replaceT = date.replace("T", " ");
                 String removeY = replaceT.replace("Z", "");
