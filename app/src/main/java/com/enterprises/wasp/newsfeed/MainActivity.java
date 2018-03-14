@@ -5,11 +5,15 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -20,10 +24,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements LoaderManager.LoaderCallbacks<List<News>> {
+        implements LoaderManager.LoaderCallbacks<List<News>>,
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
     public static final String GUARDIAN_URL =
-            "https://content.guardianapis.com/search?q=games&page-size=50&api-key=b0958911-b1a1-42d3-bb91-62aa34a31843";
+            "https://content.guardianapis.com/search";
     private static final int NEWS_LOADER_ID = 1;
     private ProgressBar progressBar;
     private TextView emptyView;
@@ -48,6 +53,12 @@ public class MainActivity extends AppCompatActivity
         adapter = new NewsAdapter(this, new ArrayList<News>());
 
         newsListView.setAdapter(adapter);
+
+        // Obtain a reference to the SharedPreferences file for this app
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        // And register to be notified of preference changes
+        // So we know when the user has adjusted the query settings
+        prefs.registerOnSharedPreferenceChangeListener(this);
 
         newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -74,13 +85,61 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+        if (key.equals(getString(R.string.settings_start_time_key)) ||
+                key.equals(getString(R.string.settings_time_key)) ||
+                key.equals(getString(R.string.settings_section_key))) {
+            // Clear the ListView as a new query will be kicked off
+            adapter.clear();
+
+            // Hide the empty state text view as the loading indicator will be displayed
+            emptyView.setVisibility(View.GONE);
+
+            // Show the loading indicator while new data is being fetched
+            View loadingIndicator = findViewById(R.id.indeterminateBar);
+            loadingIndicator.setVisibility(View.VISIBLE);
+
+            // Restart the loader to requery the USGS as the query settings have been updated
+            getLoaderManager().restartLoader(NEWS_LOADER_ID, null, this);
+        }
+    }
+
+    @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
-        return new NewsLoader(this, GUARDIAN_URL);
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String defaultSection = sharedPrefs.getString(
+                getString(R.string.settings_section_key),
+                getString(R.string.settings_section_default)
+        );
+
+        String defaultStartTime = sharedPrefs.getString(
+                getString(R.string.settings_start_time_key),
+                getString(R.string.settings_start_time_default));
+
+        String defaultEndTime = sharedPrefs.getString(
+                getString(R.string.settings_time_key),
+                getString(R.string.settings_time_default));
+
+        Uri baseUri = Uri.parse(GUARDIAN_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        uriBuilder.appendQueryParameter("section", defaultSection);
+        uriBuilder.appendQueryParameter("page-size", "50");
+        uriBuilder.appendQueryParameter("from-date", defaultStartTime);
+        uriBuilder.appendQueryParameter("to-date", defaultEndTime);
+        uriBuilder.appendQueryParameter("api-key", "b0958911-b1a1-42d3-bb91-62aa34a31843");
+
+        return new NewsLoader(this, uriBuilder.toString());
     }
 
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> news) {
-        adapter.clear();
+        // Hide loading indicator because the data has been loaded
+        View loadingIndicator = findViewById(R.id.indeterminateBar);
+        loadingIndicator.setVisibility(View.GONE);
+
+        //adapter.clear();
 
         if (news != null && !news.isEmpty()) {
             adapter.addAll(news);
@@ -92,6 +151,23 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLoaderReset(Loader<List<News>> loader) {
         adapter.clear();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

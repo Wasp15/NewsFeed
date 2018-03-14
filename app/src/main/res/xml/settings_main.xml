@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/news_settings">
+
+    <ListPreference
+        android:defaultValue="@string/settings_section_default"
+        android:entries="@array/settings_order_by_labels"
+        android:entryValues="@array/settings_order_by_labels_values"
+        android:key="@string/settings_section_key"
+        android:title="@string/settings_section_label" />
+
+    <ListPreference
+        android:defaultValue="@string/settings_start_time_default"
+        android:entries="@array/settings_time_labels"
+        android:entryValues="@array/settings_time_values"
+        android:key="@string/settings_start_time_key"
+        android:title="@string/start_date" />
+
+    <ListPreference
+        android:defaultValue="@string/settings_time_default"
+        android:entries="@array/settings_time_labels"
+        android:entryValues="@array/settings_time_values"
+        android:key="@string/settings_time_key"
+        android:title="@string/end_date" />
+
+</PreferenceScreen>
+

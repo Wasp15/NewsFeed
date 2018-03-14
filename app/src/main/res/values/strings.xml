@@ -1,6 +1,69 @@
 <resources>
     <string name="app_name">News Feed</string>
     <string name="internet_connection_err">No internet connection.</string>
-    <string name="stories_err">Currently there are no stories for you. You can always come back later and check for new stories.</string>
+    <string name="stories_err">Currently there are no stories for you.
+        You can always come back later and check for new stories.</string>
+    <string name="settings_menu_item">Settings</string>
+
+    <!-- Strings For sort by start time Preference [CHAR LIMIT=30] -->
+    <string name="settings_start_time_label">Sort by time</string>
+    <string name="settings_start_time_key" translatable="false">from_date</string>
+    <string name="settings_start_time_default" translatable="false">2010-01-01</string>
+
+    <!-- Strings For sort by end time Preference [CHAR LIMIT=30] -->
+    <string name="settings_time_label">Sort by time</string>
+    <string name="settings_time_key" translatable="false">to_date</string>
+    <string name="settings_time_default" translatable="false">2018-12-12</string>
+
+    <!-- Strings For sort by topic Preference [CHAR LIMIT=30] -->
+    <string name="settings_section_label">Sort by topic</string>
+    <string name="settings_section_key" translatable="false">sections</string>
+    <string name="settings_section_default" translatable="false">sport</string>
+
+    <!-- Label for order-by sport option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_sport_label">Sports</string>
+    <string name="settings_order_by_sport_value" translatable="false">sport</string>
+
+    <!-- Label for order-by politics option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_politics_label">Politics</string>
+    <string name="settings_order_by_politics_value" translatable="false">politics</string>
+
+    <!-- Label for order-by gaming option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_gaming_label">Gaming</string>
+    <string name="settings_order_by_gaming_value" translatable="false">games</string>
+
+    <!-- Label for order-by politics option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_news_label">General News</string>
+    <string name="settings_order_by_news_value" translatable="false">news</string>
+
+    <!-- Label for order-by politics option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_weather_label">Weather</string>
+    <string name="settings_order_by_weather_value" translatable="false">weather</string>
+
+    <string name="label_2010">2010</string>
+    <string name="label_2011">2011</string>
+    <string name="label_2012">2012</string>
+    <string name="label_2013">2013</string>
+    <string name="label_2014">2014</string>
+    <string name="label_2015">2015</string>
+    <string name="label_2016">2016</string>
+    <string name="label_2017">2017</string>
+    <string name="label_2018">2018</string>
+    <string name="label_2019">2019</string>
+
+    <string name="value_2010">2010-01-01</string>
+    <string name="value_2011">2011-01-01</string>
+    <string name="value_2012">2012-01-01</string>
+    <string name="value_2013">2013-01-01</string>
+    <string name="value_2014">2014-01-01</string>
+    <string name="value_2015">2015-01-01</string>
+    <string name="value_2016">2016-01-01</string>
+    <string name="value_2017">2017-01-01</string>
+    <string name="value_2018">2018-01-01</string>
+    <string name="value_2019">2019-01-01</string>
+
+    <string name="news_settings">News Settings</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
 </resources>
 
