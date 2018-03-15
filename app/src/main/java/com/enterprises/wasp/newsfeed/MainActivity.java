@@ -27,8 +27,7 @@ public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<News>>,
         SharedPreferences.OnSharedPreferenceChangeListener {
 
-    public static final String GUARDIAN_URL =
-            "https://content.guardianapis.com/search";
+    public static final String GUARDIAN_URL = "https://content.guardianapis.com/search";
     private static final int NEWS_LOADER_ID = 1;
     private ProgressBar progressBar;
     private TextView emptyView;
