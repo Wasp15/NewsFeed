@@ -10,11 +10,15 @@ public class News {
 
     private String privateUrl;
 
-    public News(String sectionName, String webTitle, String webPublicationDate, String url) {
+    private String privateAuthorName;
+
+    public News(String sectionName, String webTitle, String webPublicationDate, String url,
+                String authorName) {
         privateSectionName = sectionName;
         privateWebTitle = webTitle;
         privateWebPublicationDate = webPublicationDate;
         privateUrl = url;
+        privateAuthorName = authorName;
     }
 
     public String getPrivateSectionName() {
@@ -31,6 +35,10 @@ public class News {
 
     public String getPrivateUrl() {
         return privateUrl;
+    }
+
+    public String getPrivateAuthorName() {
+        return privateAuthorName;
     }
 }
 

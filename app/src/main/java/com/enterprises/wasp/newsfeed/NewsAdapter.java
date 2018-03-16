@@ -26,7 +26,11 @@ public class NewsAdapter extends ArrayAdapter<News> {
         News currentStory = getItem(position);
 
         TextView titleView = listItemView.findViewById(R.id.title);
-        String title = currentStory.getPrivateWebTitle();
+        String title;
+        if (currentStory.getPrivateAuthorName() != null)
+            title = currentStory.getPrivateWebTitle() + " | " + currentStory.getPrivateAuthorName();
+        else
+            title = currentStory.getPrivateWebTitle();
         titleView.setText(title);
 
         TextView sectionView = listItemView.findViewById(R.id.section);

@@ -126,7 +126,21 @@ public final class QueryUtils {
                 String removeY = replaceT.replace("Z", "");
                 date = removeY;
 
-                News news1 = new News(sectionName, webTitle, date, webUrl);
+                String authorName = null;
+                try {
+                    // Extract the JSONArray associated with the key called "tags",
+                    JSONArray tags = temp.getJSONArray("tags");
+                    // Loop through each item of tags
+                    for (int j = 0; j < tags.length(); j++) {
+                        JSONObject authorNameObject = tags.getJSONObject(j);
+                        // Extract the value for the key called "webTitle", which is the author name
+                        authorName = authorNameObject.getString(WEB_TITLE);
+                    }
+                } catch (Exception e) {
+                    Log.v(LOG_TAG, "No author Name");
+                }
+
+                News news1 = new News(sectionName, webTitle, date, webUrl, authorName);
                 news.add(news1);
             }
         } catch (JSONException e) {

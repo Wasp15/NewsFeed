@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity
 
         uriBuilder.appendQueryParameter("section", defaultSection);
         uriBuilder.appendQueryParameter("page-size", "150");
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("from-date", defaultStartTime);
         uriBuilder.appendQueryParameter("to-date", defaultEndTime);
         uriBuilder.appendQueryParameter("api-key", "b0958911-b1a1-42d3-bb91-62aa34a31843");
