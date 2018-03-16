@@ -137,7 +137,7 @@ public final class QueryUtils {
                         authorName = authorNameObject.getString(WEB_TITLE);
                     }
                 } catch (Exception e) {
-                    Log.v(LOG_TAG, "No author Name");
+                    Log.e(LOG_TAG, "No author Name");
                 }
 
                 News news1 = new News(sectionName, webTitle, date, webUrl, authorName);
