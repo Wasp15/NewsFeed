@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity
             View loadingIndicator = findViewById(R.id.indeterminateBar);
             loadingIndicator.setVisibility(View.VISIBLE);
 
-            // Restart the loader to requery the USGS as the query settings have been updated
+            // Restart the loader to re-query the USGS as the query settings have been updated
             getLoaderManager().restartLoader(NEWS_LOADER_ID, null, this);
         }
     }

@@ -53,8 +53,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         private void bindPreferencesToValue(Preference preference) {
             preference.setOnPreferenceChangeListener(this);
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences
-                    (preference.getContext());
+            SharedPreferences preferences =
+                    PreferenceManager.getDefaultSharedPreferences(preference.getContext());
             String preferenceString = preferences.getString(preference.getKey(), "");
             onPreferenceChange(preference, preferenceString);
         }
